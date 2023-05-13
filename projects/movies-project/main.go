@@ -22,6 +22,10 @@ type Director struct {
 	LastName  string `json:"lastName"`
 }
 
+func home(rw http.ResponseWriter, r *http.Request) {
+	rw.Write([]byte("welcome to home page"))
+}
+
 func getMovies(rw http.ResponseWriter, r *http.Request) {
 	rw.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(rw).Encode(movies)
@@ -82,6 +86,8 @@ func main() {
 	movies = append(movies, Movie{ID: "1", ISBN: "423776", Title: "Clash of the Titans", Director: &Director{FirstName: "Johnny", LastName: "Malik"}})
 	movies = append(movies, Movie{ID: "2", ISBN: "422566", Title: "Rumble World", Director: &Director{FirstName: "Steven", LastName: "Pattinson"}})
 
+	r.HandleFunc("/", home)
+	r.Handle("/favicon.ico", http.NotFoundHandler())
 	r.HandleFunc("/movies", getMovies).Methods("GET")
 	r.HandleFunc("/movies/{id}", getMovie).Methods("GET")
 	r.HandleFunc("/movies", createMovie).Methods("POST")
