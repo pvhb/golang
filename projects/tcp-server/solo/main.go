@@ -7,7 +7,6 @@ import (
 )
 
 func homePage(rw http.ResponseWriter, req *http.Request) {
-	// fmt.Println(rw)
 	fmt.Println(req)
 	rw.Write([]byte("Hello, Welcome to Harish's webpage!\n"))
 }
@@ -28,5 +27,6 @@ func main() {
 
 	fmt.Println("Starting a HTTP server on localhost and 6543 port")
 	fmt.Println("To kill the server : Ctrl + C ")
+	http.Handle("/favicon.ico", http.NotFoundHandler())
 	log.Fatal(http.ListenAndServe(":6543", nil))
 }
