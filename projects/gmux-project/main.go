@@ -94,7 +94,7 @@ func main() {
 	r.HandleFunc("/movies/{id}", updateMovie).Methods("PUT")
 	r.HandleFunc("/movies/{id}", deleteMovie).Methods("DELETE")
 
-	fmt.Println("Stating the server on local host on port 5100")
+	fmt.Println("Starting the server on local host on port 5100")
 	fmt.Println("To terminate : Ctrl + C")
 	log.Fatal(http.ListenAndServe(":5100", r))
 }
